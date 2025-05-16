@@ -1,0 +1,2366 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 142 41% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 142 41% 95%;
+    --secondary-foreground: 142 41% 25%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 142 41% 95%;
+    --accent-foreground: 142 41% 25%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 142 41% 45%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 220 20% 10%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 160 100% 50%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 196 100% 60%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 196 100% 50%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 196 100% 50%;
+
+    /* Circuit theme colors */
+    --circuit-primary: 160 100% 50%;
+    --circuit-secondary: 196 100% 60%;
+    --circuit-accent: 270 100% 70%;
+    --circuit-dark: 220 20% 10%;
+    --circuit-light: 210 40% 98%;
+    --circuit-glow: 160 100% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Circuit Grid Background */
+.circuit-grid-bg {
+  background-color: white;
+  background-image: linear-gradient(rgba(106, 168, 67, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(106, 168, 67, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 20px 20px, rgba(106, 168, 67, 0.05) 2px, transparent 2px);
+  background-size: 20px 20px, 20px 20px, 40px 40px;
+  background-position: center center;
+}
+
+/* Circuit Pattern */
+.circuit-pattern {
+  position: relative;
+}
+
+.circuit-pattern::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(90deg, transparent 98%, rgba(106, 168, 67, 0.2) 98%),
+    linear-gradient(0deg, transparent 98%, rgba(106, 168, 67, 0.2) 98%),
+    radial-gradient(circle at 15px 15px, rgba(106, 168, 67, 0.1) 0, rgba(106, 168, 67, 0.1) 2px, transparent 2px);
+  background-size: 30px 30px, 30px 30px, 30px 30px;
+  opacity: 0.3;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Circuit Card */
+.circuit-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(106, 168, 67, 0.2);
+}
+
+.circuit-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(90deg, transparent 98%, rgba(106, 168, 67, 0.2) 98%),
+    linear-gradient(180deg, transparent 98%, rgba(106, 168, 67, 0.2) 98%);
+  background-size: 10px 10px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.circuit-card:hover {
+  box-shadow: 0 0 15px rgba(106, 168, 67, 0.3);
+  transform: translateY(-5px);
+}
+
+/* Circuit Button */
+.circuit-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(106, 168, 67, 0.5);
+}
+
+.circuit-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 150, 0.2), transparent);
+  transition: all 0.6s ease;
+  z-index: 1;
+}
+
+.circuit-btn:hover::before {
+  left: 100%;
+}
+
+.circuit-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(90deg, transparent 90%, rgba(106, 168, 67, 0.3) 90%),
+    linear-gradient(180deg, transparent 90%, rgba(106, 168, 67, 0.3) 90%);
+  background-size: 10px 10px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+/* Circuit Line */
+.circuit-line {
+  position: relative;
+}
+
+.circuit-line::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+  width: 100%;
+  bottom: -5px;
+  left: 0;
+}
+
+/* Circuit Node */
+.circuit-node {
+  position: relative;
+}
+
+.circuit-node::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: hsl(var(--primary));
+  top: 50%;
+  left: -15px;
+  transform: translateY(-50%);
+}
+
+/* Chip Component */
+.chip-component {
+  position: relative;
+  border: 2px solid hsl(var(--primary));
+  border-radius: 4px;
+  padding: 15px;
+  background-color: white;
+}
+
+.chip-component::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: hsl(var(--primary));
+}
+
+/* Motherboard Grid */
+.motherboard-grid {
+  background-image: linear-gradient(rgba(106, 168, 67, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(106, 168, 67, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center center;
+}
+
+/* Circuit Paths */
+.circuit-paths {
+  position: relative;
+}
+
+.circuit-paths::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      90deg,
+      transparent 49%,
+      rgba(106, 168, 67, 0.2) 49%,
+      rgba(106, 168, 67, 0.2) 51%,
+      transparent 51%
+    ), linear-gradient(0deg, transparent 49%, rgba(106, 168, 67, 0.2) 49%, rgba(106, 168, 67, 0.2) 51%, transparent 51%);
+  background-size: 30px 30px;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* Circuit Nodes */
+.circuit-nodes {
+  position: relative;
+}
+
+.circuit-nodes::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    circle at 15px 15px,
+    rgba(106, 168, 67, 0.3) 0,
+    rgba(106, 168, 67, 0.3) 2px,
+    transparent 2px
+  );
+  background-size: 30px 30px;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* Circuit Board */
+.circuit-board {
+  position: relative;
+  overflow: hidden;
+}
+
+.circuit-board::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, transparent 98%, rgba(106, 168, 67, 0.3) 98%),
+    linear-gradient(0deg, transparent 98%, rgba(106, 168, 67, 0.3) 98%),
+    radial-gradient(circle at 15px 15px, rgba(106, 168, 67, 0.1) 0, rgba(106, 168, 67, 0.1) 2px, transparent 2px);
+  background-size: 30px 30px, 30px 30px, 30px 30px;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* Circuit Lines */
+.circuit-lines {
+  position: relative;
+}
+
+.circuit-lines::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      90deg,
+      transparent 49.5%,
+      rgba(106, 168, 67, 0.2) 49.5%,
+      rgba(106, 168, 67, 0.2) 50.5%,
+      transparent 50.5%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 49.5%,
+      rgba(106, 168, 67, 0.2) 49.5%,
+      rgba(106, 168, 67, 0.2) 50.5%,
+      transparent 50.5%
+    );
+  background-size: 20px 20px;
+  opacity: 0.2;
+  z-index: -1;
+}
+
+/* Circuit Dots */
+.circuit-dots {
+  position: relative;
+}
+
+.circuit-dots::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    circle at 10px 10px,
+    rgba(106, 168, 67, 0.2) 0,
+    rgba(106, 168, 67, 0.2) 2px,
+    transparent 2px
+  );
+  background-size: 20px 20px;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* Circuit Grid */
+.circuit-grid {
+  position: relative;
+}
+
+.circuit-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, transparent 98%, rgba(106, 168, 67, 0.1) 98%),
+    linear-gradient(0deg, transparent 98%, rgba(106, 168, 67, 0.1) 98%);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* Circuit Chip */
+.circuit-chip {
+  position: relative;
+  overflow: hidden;
+}
+
+.circuit-chip::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, transparent 90%, rgba(106, 168, 67, 0.3) 90%),
+    linear-gradient(0deg, transparent 90%, rgba(106, 168, 67, 0.3) 90%);
+  background-size: 10px 10px;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+.circuit-chip::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: hsl(var(--primary));
+}
+
+/* Clean, subtle circuit pattern */
+.circuit-background {
+  background-image: linear-gradient(rgba(0, 200, 150, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 200, 150, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center center;
+}
+
+/* Professional section styling */
+.tech-section {
+  @apply relative py-16 border-b border-slate-800;
+}
+
+/* Clean card styling */
+.tech-card {
+  @apply bg-slate-900 border border-slate-800 rounded-lg shadow-lg overflow-hidden transition-all duration-300;
+}
+
+/* Professional button styling */
+.tech-button {
+  @apply bg-primary text-white font-medium py-2 px-4 rounded-md shadow-md hover:bg-primary/90 transition-colors whitespace-nowrap;
+}
+
+/* Clean heading styling */
+.tech-heading {
+  @apply text-white font-bold;
+}
+
+/* Improved navigation styling */
+.nav-item {
+  @apply text-slate-300 hover:text-white transition-colors;
+}
+
+/* Professional dropdown styling */
+.dropdown-item {
+  @apply bg-slate-800 text-white hover:bg-slate-700 transition-colors;
+}
+
+/* Hero section with high contrast */
+.hero-content {
+  @apply bg-slate-900/80 backdrop-blur-sm p-6 rounded-lg shadow-xl border border-slate-800;
+}
+
+/* Glowing Elements */
+.circuit-glow {
+  box-shadow: 0 0 10px rgba(0, 200, 150, 0.5);
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 200, 150, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 200, 150, 0.8);
+  }
+}
+
+/* Data Flow Animation */
+.data-flow {
+  position: relative;
+  overflow: hidden;
+}
+
+.data-flow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 150, 0.2), transparent);
+  animation: data-flow 3s infinite;
+  z-index: 1;
+}
+
+@keyframes data-flow {
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+/* Blinking LED */
+.led-blink {
+  animation: led-blink 2s infinite;
+}
+
+@keyframes led-blink {
+  0%,
+  18%,
+  22%,
+  92%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  90% {
+    opacity: 0.3;
+  }
+}
+
+/* Connector Dots */
+.connector-dot {
+  position: relative;
+}
+
+.connector-dot::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: hsl(var(--circuit-primary));
+  top: 50%;
+  left: -15px;
+  transform: translateY(-50%);
+  box-shadow: 0 0 5px rgba(0, 200, 150, 0.8);
+}
+
+/* Animated Background */
+.animated-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle at 20px 20px, rgba(0, 200, 150, 0.1) 0, transparent 8px),
+    linear-gradient(to right, rgba(0, 200, 150, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 200, 150, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px, 20px 20px, 20px 20px;
+  z-index: -1;
+  opacity: 0.8;
+  animation: bg-shift 20s linear infinite;
+}
+
+@keyframes bg-shift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+/* Floating Elements */
+.float-element {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Rotating Gear */
+.rotating-gear {
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fade In Animation */
+.fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Slide In Animation */
+.slide-in-left {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-up {
+  animation: slideInUp 0.5s ease-out;
+}
+
+@keyframes slideInUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Typing Animation */
+.typing-animation {
+  overflow: hidden;
+  border-right: 2px solid hsl(var(--circuit-primary));
+  white-space: nowrap;
+  margin: 0 auto;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: hsl(var(--circuit-primary));
+  }
+}
+
+/* Particle Animation */
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: rgba(0, 200, 150, 0.5);
+  border-radius: 50%;
+}
+
+/* Scroll Animation */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* LED Indicators */
+.led-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: hsl(var(--circuit-primary));
+  box-shadow: 0 0 5px rgba(0, 200, 150, 0.8);
+  margin-right: 5px;
+  animation: led-pulse 2s infinite alternate;
+}
+
+@keyframes led-pulse {
+  0% {
+    opacity: 0.5;
+    box-shadow: 0 0 5px rgba(0, 200, 150, 0.5);
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(0, 200, 150, 1);
+  }
+}
+
+/* Circuit Paths */
+.circuit-path {
+  position: relative;
+}
+
+.circuit-path::before {
+  content: "";
+  position: absolute;
+  height: 2px;
+  background-color: hsl(var(--circuit-primary));
+  width: 100%;
+  top: calc(50% - 1px);
+  left: 0;
+  opacity: 0.5;
+}
+
+.circuit-path::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  background-color: hsl(var(--circuit-primary));
+  width: 30%;
+  top: calc(50% - 1px);
+  left: 0;
+  opacity: 1;
+  box-shadow: 0 0 5px rgba(0, 200, 150, 0.8);
+  animation: circuit-path-flow 2s infinite;
+}
+
+@keyframes circuit-path-flow {
+  0% {
+    left: 0;
+    width: 0;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    left: 100%;
+    width: 0;
+  }
+}
+
+/* Animated Borders */
+.animated-border {
+  position: relative;
+}
+
+.animated-border::before,
+.animated-border::after {
+  content: "";
+  position: absolute;
+  background-color: hsl(var(--circuit-primary));
+}
+
+.animated-border::before {
+  width: 2px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  animation: border-line-vertical 2s infinite alternate;
+}
+
+.animated-border::after {
+  width: 100%;
+  height: 2px;
+  top: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: border-line-horizontal 2s infinite alternate;
+}
+
+@keyframes border-line-vertical {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes border-line-horizontal {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--circuit-primary));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--circuit-secondary));
+}
+
+/* Animations for page transitions */
+@keyframes fadeInPage {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.page-transition {
+  animation: fadeInPage 0.5s ease-in;
+}
+
+/* Staggered animations for lists */
+.stagger-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stagger-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stagger-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.stagger-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.stagger-item:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.stagger-item:nth-child(6) {
+  animation-delay: 0.6s;
+}
+.stagger-item:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.stagger-item:nth-child(8) {
+  animation-delay: 0.8s;
+}
+.stagger-item:nth-child(9) {
+  animation-delay: 0.9s;
+}
+.stagger-item:nth-child(10) {
+  animation-delay: 1s;
+}
+
+/* Animated background gradient */
+.gradient-bg {
+  background: linear-gradient(
+    -45deg,
+    rgba(0, 200, 150, 0.1),
+    rgba(0, 150, 200, 0.1),
+    rgba(0, 100, 200, 0.1),
+    rgba(0, 200, 100, 0.1)
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Animated text gradient */
+.text-gradient {
+  background: linear-gradient(
+    -45deg,
+    hsl(var(--circuit-primary)),
+    hsl(var(--circuit-secondary)),
+    hsl(var(--circuit-accent)),
+    hsl(var(--circuit-primary))
+  );
+  background-size: 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient 10s ease infinite;
+}
+
+/* Animated underline */
+.animated-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.animated-underline::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: hsl(var(--circuit-primary));
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.animated-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Animated dots */
+.animated-dots::after {
+  content: "...";
+  animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+  0%,
+  20% {
+    content: ".";
+  }
+  40% {
+    content: "..";
+  }
+  60%,
+  100% {
+    content: "...";
+  }
+}
+
+/* Animated circuit paths */
+.circuit-paths {
+  position: relative;
+}
+
+.circuit-paths::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      90deg,
+      transparent 49%,
+      rgba(0, 200, 150, 0.2) 49%,
+      rgba(0, 200, 150, 0.2) 51%,
+      transparent 51%
+    ), linear-gradient(0deg, transparent 49%, rgba(0, 200, 150, 0.2) 49%, rgba(0, 200, 150, 0.2) 51%, transparent 51%);
+  background-size: 30px 30px;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* Animated circuit nodes */
+.circuit-nodes {
+  position: relative;
+}
+
+.circuit-nodes::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    circle at 15px 15px,
+    rgba(0, 200, 150, 0.3) 0,
+    rgba(0, 200, 150, 0.3) 2px,
+    transparent 2px
+  );
+  background-size: 30px 30px;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* Animated loading spinner */
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(0, 200, 150, 0.3);
+  border-radius: 50%;
+  border-top-color: hsl(var(--circuit-primary));
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animated progress bar */
+.progress-bar {
+  height: 4px;
+  background-color: rgba(0, 200, 150, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 30%;
+  background-color: hsl(var(--circuit-primary));
+  animation: progress 2s linear infinite;
+}
+
+@keyframes progress {
+  0% {
+    left: -30%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Animated chip */
+.chip {
+  position: relative;
+  padding: 10px 15px;
+  border: 1px solid hsl(var(--circuit-primary));
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.chip::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, transparent 90%, rgba(0, 200, 150, 0.3) 90%),
+    linear-gradient(0deg, transparent 90%, rgba(0, 200, 150, 0.3) 90%);
+  background-size: 10px 10px;
+  opacity: 0.2;
+  z-index: -1;
+}
+
+.chip::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: hsl(var(--circuit-primary));
+  box-shadow: 0 0 3px rgba(0, 200, 150, 0.8);
+  animation: blink 2s infinite alternate;
+}
+
+@keyframes blink {
+  0%,
+  80% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Animated connection lines */
+.connection-lines {
+  position: relative;
+}
+
+.connection-lines::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  width: 20px;
+  height: 2px;
+  background-color: hsl(var(--circuit-primary));
+  transform: translateY(-50%);
+}
+
+.connection-lines::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -25px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: hsl(var(--circuit-primary));
+  transform: translateY(-50%);
+  box-shadow: 0 0 5px rgba(0, 200, 150, 0.8);
+}
+
+/* Animated data transfer */
+.data-transfer {
+  position: relative;
+  overflow: hidden;
+}
+
+.data-transfer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 150, 0.2), transparent);
+  animation: data-transfer 2s infinite;
+  z-index: 1;
+}
+
+@keyframes data-transfer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Animated circuit board */
+.circuit-board {
+  position: relative;
+  overflow: hidden;
+}
+
+.circuit-board::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, transparent 98%, rgba(0, 200, 150, 0.3) 98%),
+    linear-gradient(0deg, transparent 98%, rgba(0, 200, 150, 0.3) 98%),
+    radial-gradient(circle at 15px 15px, rgba(0, 200, 150, 0.1) 0, rgba(0, 200, 150, 0.1) 2px, transparent 2px);
+  background-size: 30px 30px, 30px 30px, 30px 30px;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* Animated circuit paths */
+.animated-circuit-paths {
+  position: relative;
+}
+
+.animated-circuit-paths::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      90deg,
+      transparent 49.5%,
+      rgba(0, 200, 150, 0.3) 49.5%,
+      rgba(0, 200, 150, 0.3) 50.5%,
+      transparent 50.5%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 49.5%,
+      rgba(0, 200, 150, 0.3) 49.5%,
+      rgba(0, 200, 150, 0.3) 50.5%,
+      transparent 50.5%
+    );
+  background-size: 30px 30px;
+  opacity: 0.2;
+  z-index: -1;
+  animation: circuit-paths-shift 20s linear infinite;
+}
+
+@keyframes circuit-paths-shift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 30px 30px;
+  }
+}
+
+/* Animated circuit nodes */
+.animated-circuit-nodes {
+  position: relative;
+}
+
+.animated-circuit-nodes::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    circle at 15px 15px,
+    rgba(0, 200, 150, 0.2) 0,
+    rgba(0, 200, 150, 0.2) 2px,
+    transparent 2px
+  );
+  background-size: 30px 30px;
+  opacity: 0.3;
+  z-index: -1;
+  animation: circuit-nodes-pulse 3s infinite alternate;
+}
+
+@keyframes circuit-nodes-pulse {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+/* Animated circuit board background */
+.animated-circuit-board {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-circuit-board::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, transparent 98%, rgba(0, 200, 150, 0.2) 98%),
+    linear-gradient(0deg, transparent 98%, rgba(0, 200, 150, 0.2) 98%),
+    radial-gradient(circle at 15px 15px, rgba(0, 200, 150, 0.1) 0, rgba(0, 200, 150, 0.1) 2px, transparent 2px);
+  background-size: 30px 30px, 30px 30px, 30px 30px;
+  opacity: 0.2;
+  z-index: -1;
+  animation: circuit-board-shift 30s linear infinite;
+}
+
+@keyframes circuit-board-shift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 30px 30px;
+  }
+}
+
+/* Animated circuit lines */
+.animated-circuit-lines {
+  position: relative;
+}
+
+.animated-circuit-lines::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      90deg,
+      transparent 49.5%,
+      rgba(0, 200, 150, 0.2) 49.5%,
+      rgba(0, 200, 150, 0.2) 50.5%,
+      transparent 50.5%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 49.5%,
+      rgba(0, 200, 150, 0.2) 49.5%,
+      rgba(0, 200, 150, 0.2) 50.5%,
+      transparent 50.5%
+    );
+  background-size: 20px 20px;
+  opacity: 0.2;
+  z-index: -1;
+}
+
+.animated-circuit-lines::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 150, 0.3), transparent);
+  animation: circuit-lines-flow 3s infinite;
+  z-index: 0;
+}
+
+@keyframes circuit-lines-flow {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Animated circuit dots */
+.animated-circuit-dots {
+  position: relative;
+}
+
+.animated-circuit-dots::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    circle at 10px 10px,
+    rgba(0, 200, 150, 0.2) 0,
+    rgba(0, 200, 150, 0.2) 2px,
+    transparent 2px
+  );
+  background-size: 20px 20px;
+  opacity: 0.3;
+  z-index: -1;
+  animation: circuit-dots-pulse 2s infinite alternate;
+}
+
+@keyframes circuit-dots-pulse {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+/* Animated circuit grid */
+.animated-circuit-grid {
+  position: relative;
+}
+
+.animated-circuit-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, transparent 98%, rgba(0, 200, 150, 0.1) 98%),
+    linear-gradient(0deg, transparent 98%, rgba(0, 200, 150, 0.1) 98%);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  z-index: -1;
+  animation: circuit-grid-shift 20s linear infinite;
+}
+
+@keyframes circuit-grid-shift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 20px 20px;
+  }
+}
+
+/* Animated circuit flow */
+.animated-circuit-flow {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-circuit-flow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 150, 0.2), transparent);
+  animation: circuit-flow 3s infinite;
+  z-index: 1;
+}
+
+@keyframes circuit-flow {
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Animated circuit pulse */
+.animated-circuit-pulse {
+  animation: circuit-pulse 2s infinite alternate;
+}
+
+@keyframes circuit-pulse {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 200, 150, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(0, 200, 150, 0.8);
+  }
+}
+
+/* Animated circuit glow */
+.animated-circuit-glow {
+  position: relative;
+}
+
+.animated-circuit-glow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  box-shadow: 0 0 10px rgba(0, 200, 150, 0.5);
+  opacity: 0;
+  z-index: -1;
+  animation: circuit-glow 2s infinite alternate;
+}
+
+@keyframes circuit-glow {
+  0% {
+    opacity: 0;
+    box-shadow: 0 0 5px rgba(0, 200, 150, 0.5);
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 15px rgba(0, 200, 150, 0.8);
+  }
+}
+
+/* Animated circuit blink */
+.animated-circuit-blink {
+  animation: circuit-blink 2s infinite;
+}
+
+@keyframes circuit-blink {
+  0%,
+  18%,
+  22%,
+  92%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  90% {
+    opacity: 0.5;
+  }
+}
+
+/* Animated circuit fade */
+.animated-circuit-fade {
+  animation: circuit-fade 3s infinite alternate;
+}
+
+@keyframes circuit-fade {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Animated circuit rotate */
+.animated-circuit-rotate {
+  animation: circuit-rotate 10s linear infinite;
+}
+
+@keyframes circuit-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animated circuit scale */
+.animated-circuit-scale {
+  animation: circuit-scale 2s infinite alternate;
+}
+
+@keyframes circuit-scale {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+/* Animated circuit float */
+.animated-circuit-float {
+  animation: circuit-float 3s ease-in-out infinite;
+}
+
+@keyframes circuit-float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Animated circuit slide */
+.animated-circuit-slide {
+  animation: circuit-slide 3s infinite alternate;
+}
+
+@keyframes circuit-slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(10px);
+  }
+}
+
+/* Animated circuit wave */
+.animated-circuit-wave {
+  position: relative;
+}
+
+.animated-circuit-wave::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 150, 0.1), transparent);
+  animation: circuit-wave 3s infinite;
+  z-index: -1;
+}
+
+@keyframes circuit-wave {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Animated circuit border */
+.animated-circuit-border {
+  position: relative;
+}
+
+.animated-circuit-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 200, 150, 0.3);
+  border-radius: inherit;
+  animation: circuit-border 2s infinite alternate;
+}
+
+@keyframes circuit-border {
+  0% {
+    border-color: rgba(0, 200, 150, 0.3);
+  }
+  100% {
+    border-color: rgba(0, 200, 150, 0.8);
+  }
+}
+
+/* Animated circuit shadow */
+.animated-circuit-shadow {
+  position: relative;
+}
+
+.animated-circuit-shadow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  box-shadow: 0 0 10px rgba(0, 200, 150, 0.5);
+  opacity: 0;
+  z-index: -1;
+  animation: circuit-shadow 2s infinite alternate;
+}
+
+@keyframes circuit-shadow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Animated circuit background */
+.animated-circuit-background {
+  position: relative;
+}
+
+.animated-circuit-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 200, 150, 0.05);
+  z-index: -1;
+  animation: circuit-background 2s infinite alternate;
+}
+
+@keyframes circuit-background {
+  0% {
+    background-color: rgba(0, 200, 150, 0.05);
+  }
+  100% {
+    background-color: rgba(0, 200, 150, 0.1);
+  }
+}
+
+/* Animated circuit text */
+.animated-circuit-text {
+  animation: circuit-text 2s infinite alternate;
+}
+
+@keyframes circuit-text {
+  0% {
+    color: rgba(0, 200, 150, 0.8);
+  }
+  100% {
+    color: rgba(0, 200, 150, 1);
+  }
+}
+
+/* Animated circuit icon */
+.animated-circuit-icon {
+  animation: circuit-icon 2s infinite alternate;
+}
+
+@keyframes circuit-icon {
+  0% {
+    filter: drop-shadow(0 0 2px rgba(0, 200, 150, 0.5));
+  }
+  100% {
+    filter: drop-shadow(0 0 5px rgba(0, 200, 150, 0.8));
+  }
+}
+
+/* Animated circuit button */
+.animated-circuit-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-circuit-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 150, 0.2), transparent);
+  transition: all 0.6s ease;
+  z-index: 1;
+}
+
+.animated-circuit-button:hover::before {
+  left: 100%;
+}
+
+/* Animated circuit input */
+.animated-circuit-input {
+  transition: all 0.3s ease;
+}
+
+.animated-circuit-input:focus {
+  border-color: hsl(var(--circuit-primary));
+  box-shadow: 0 0 0 2px rgba(0, 200, 150, 0.2);
+}
+
+/* Animated circuit card */
+.animated-circuit-card {
+  transition: all 0.3s ease;
+}
+
+.animated-circuit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 200, 150, 0.3);
+}
+
+/* Animated circuit image */
+.animated-circuit-image {
+  transition: all 0.3s ease;
+}
+
+.animated-circuit-image:hover {
+  transform: scale(1.05);
+}
+
+/* Animated circuit link */
+.animated-circuit-link {
+  position: relative;
+  display: inline-block;
+}
+
+.animated-circuit-link::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: hsl(var(--circuit-primary));
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.animated-circuit-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Animated circuit list */
+.animated-circuit-list {
+  list-style: none;
+}
+
+.animated-circuit-list li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.animated-circuit-list li::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: hsl(var(--circuit-primary));
+  transform: translateY(-50%);
+  animation: circuit-list-pulse 2s infinite alternate;
+}
+
+@keyframes circuit-list-pulse {
+  0% {
+    box-shadow: 0 0 0 rgba(0, 200, 150, 0);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 200, 150, 0.8);
+  }
+}
+
+/* Animated circuit heading */
+.animated-circuit-heading {
+  position: relative;
+  display: inline-block;
+}
+
+.animated-circuit-heading::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background: linear-gradient(90deg, hsl(var(--circuit-primary)), transparent);
+  animation: circuit-heading-width 3s infinite alternate;
+}
+
+@keyframes circuit-heading-width {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Animated circuit section */
+.animated-circuit-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-circuit-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 20px 20px, rgba(0, 200, 150, 0.05) 0, transparent 8px),
+    linear-gradient(90deg, transparent 98%, rgba(0, 200, 150, 0.1) 98%),
+    linear-gradient(0deg, transparent 98%, rgba(0, 200, 150, 0.1) 98%);
+  background-size: 40px 40px, 20px 20px, 20px 20px;
+  z-index: -1;
+  opacity: 0.3;
+  animation: circuit-section-shift 30s linear infinite;
+}
+
+@keyframes circuit-section-shift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+/* Animated circuit container */
+.animated-circuit-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-circuit-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, transparent 98%, rgba(0, 200, 150, 0.1) 98%),
+    linear-gradient(0deg, transparent 98%, rgba(0, 200, 150, 0.1) 98%);
+  background-size: 20px 20px;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+/* Animated circuit footer */
+.animated-circuit-footer {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-circuit-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, transparent 98%, rgba(0, 200, 150, 0.1) 98%),
+    linear-gradient(0deg, transparent 98%, rgba(0, 200, 150, 0.1) 98%),
+    radial-gradient(circle at 20px 20px, rgba(0, 200, 150, 0.05) 0, transparent 8px);
+  background-size: 20px 20px, 20px 20px, 40px 40px;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+/* Animated circuit header */
+.animated-circuit-header {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-circuit-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, transparent 98%, rgba(0, 200, 150, 0.1) 98%),
+    linear-gradient(0deg, transparent 98%, rgba(0, 200, 150, 0.1) 98%);
+  background-size: 20px 20px;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+/* Animated circuit nav */
+.animated-circuit-nav {
+  position: relative;
+}
+
+.animated-circuit-nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--circuit-primary)), transparent);
+  opacity: 0.5;
+}
+
+/* Animated circuit main */
+.animated-circuit-main {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-circuit-main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 20px 20px, rgba(0, 200, 150, 0.05) 0, transparent 8px),
+    linear-gradient(90deg, transparent 98%, rgba(0, 200, 150, 0.1) 98%),
+    linear-gradient(0deg, transparent 98%, rgba(0, 200, 150, 0.1) 98%);
+  background-size: 40px 40px, 20px 20px, 20px 20px;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+/* Animated circuit hero */
+.animated-circuit-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-circuit-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 20px 20px, rgba(0, 200, 150, 0.1) 0, transparent 8px),
+    linear-gradient(90deg, transparent 98%, rgba(0, 200, 150, 0.2) 98%),
+    linear-gradient(0deg, transparent 98%, rgba(0, 200, 150, 0.2) 98%);
+  background-size: 40px 40px, 20px 20px, 20px 20px;
+  z-index: -1;
+  opacity: 0.3;
+  animation: circuit-hero-shift 30s linear infinite;
+}
+
+@keyframes circuit-hero-shift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+/* Animated circuit cta */
+.animated-circuit-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-circuit-cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 20px 20px, rgba(0, 200, 150, 0.1) 0, transparent 8px);
+  background-size: 40px 40px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.animated-circuit-cta::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 150, 0.2), transparent);
+  animation: circuit-cta-flow 3s infinite;
+  z-index: 0;
+}
+
+@keyframes circuit-cta-flow {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Animated circuit form */
+.animated-circuit-form {
+  position: relative;
+}
+
+.animated-circuit-form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--circuit-primary)), transparent);
+  opacity: 0.5;
+}
+
+.animated-circuit-form::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--circuit-primary)), transparent);
+  opacity: 0.5;
+}
+
+/* Animated circuit table */
+.animated-circuit-table {
+  position: relative;
+}
+
+.animated-circuit-table th {
+  position: relative;
+}
+
+.animated-circuit-table th::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--circuit-primary)), transparent);
+  opacity: 0.5;
+}
+
+.animated-circuit-table tr:hover {
+  background-color: rgba(0, 200, 150, 0.05);
+}
+
+/* Animated circuit tabs */
+.animated-circuit-tabs {
+  position: relative;
+}
+
+.animated-circuit-tabs::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--circuit-primary)), transparent);
+  opacity: 0.5;
+}
+
+/* Animated circuit accordion */
+.animated-circuit-accordion {
+  position: relative;
+}
+
+.animated-circuit-accordion::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(0deg, transparent, hsl(var(--circuit-primary)), transparent);
+  opacity: 0.5;
+}
+
+/* Animated circuit modal */
+.animated-circuit-modal {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-circuit-modal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, transparent 98%, rgba(0, 200, 150, 0.2) 98%),
+    linear-gradient(0deg, transparent 98%, rgba(0, 200, 150, 0.2) 98%);
+  background-size: 20px 20px;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+/* Animated circuit tooltip */
+.animated-circuit-tooltip {
+  position: relative;
+}
+
+.animated-circuit-tooltip::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid hsl(var(--circuit-primary));
+  border-radius: inherit;
+  opacity: 0.5;
+  animation: circuit-tooltip-pulse 2s infinite alternate;
+}
+
+@keyframes circuit-tooltip-pulse {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+/* Animated circuit badge */
+.animated-circuit-badge {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-circuit-badge::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 150, 0.2), transparent);
+  animation: circuit-badge-flow 2s infinite;
+  z-index: 1;
+}
+
+@keyframes circuit-badge-flow {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Animated circuit progress */
+.animated-circuit-progress {
+  position: relative;
+  height: 4px;
+  background-color: rgba(0, 200, 150, 0.2);
+  overflow: hidden;
+}
+
+.animated-circuit-progress::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, hsl(var(--circuit-primary)), transparent);
+  animation: circuit-progress-flow 2s infinite;
+}
+
+@keyframes circuit-progress-flow {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Animated circuit spinner */
+.animated-circuit-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 200, 150, 0.3);
+  border-radius: 50%;
+  border-top-color: hsl(var(--circuit-primary));
+  animation: circuit-spinner-spin 1s linear infinite;
+}
+
+@keyframes circuit-spinner-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animated circuit skeleton */
+.animated-circuit-skeleton {
+  background: linear-gradient(90deg, rgba(0, 200, 150, 0.1), rgba(0, 200, 150, 0.2), rgba(0, 200, 150, 0.1));
+  background-size: 200% 100%;
+  animation: circuit-skeleton-loading 1.5s infinite;
+}
+
+@keyframes circuit-skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Animated circuit divider */
+.animated-circuit-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, hsl(var(--circuit-primary)), transparent);
+  opacity: 0.5;
+  animation: circuit-divider-width 3s infinite alternate;
+}
+
+@keyframes circuit-divider-width {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Animated circuit avatar */
+.animated-circuit-avatar {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-circuit-avatar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid hsl(var(--circuit-primary));
+  border-radius: inherit;
+  opacity: 0.5;
+  animation: circuit-avatar-pulse 2s infinite alternate;
+}
+
+@keyframes circuit-avatar-pulse {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Animated circuit chip */
+.animated-circuit-chip {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-circuit-chip::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, transparent 90%, rgba(0, 200, 150, 0.3) 90%),
+    linear-gradient(0deg, transparent 90%, rgba(0, 200, 150, 0.3) 90%);
+  background-size: 10px 10px;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+.animated-circuit-chip::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: hsl(var(--circuit-primary));
+  box-shadow: 0 0 5px rgba(0, 200, 150, 0.8);
+  animation: circuit-chip-blink 2s infinite alternate;
+}
+
+@keyframes circuit-chip-blink {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Circuit Grid Background */
+.circuit-grid-bg {
+  background-color: white;
+  background-image: linear-gradient(rgba(74, 222, 128, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74, 222, 128, 0.05) 1px, transparent 1px),
+    radial-gradient(circle, rgba(74, 222, 128, 0.1) 2px, transparent 2px);
+  background-size: 50px 50px, 50px 50px, 150px 150px;
+  background-position: 0 0, 0 0, 25px 25px;
+}
+
+.circuit-hero-bg {
+  position: relative;
+}
+
+.circuit-hero-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(rgba(74, 222, 128, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74, 222, 128, 0.1) 1px, transparent 1px),
+    radial-gradient(circle, rgba(74, 222, 128, 0.15) 2px, transparent 2px);
+  background-size: 30px 30px, 30px 30px, 100px 100px;
+  background-position: 0 0, 0 0, 15px 15px;
+  z-index: -1;
+}
